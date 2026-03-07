@@ -23,8 +23,41 @@
 
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1 class="text-5xl text-green-900 font-extrabold">Hello</h1>
+  <body class="max-w-[1200px] mx-auto my-6">
+    <header class="flex justify-between items-center">
+      <div class="flex items-center gap-1.5">
+        <img width="36px" src="./assets/github-logo.png" alt="" />
+        <h1 class="text-2xl font-bold">GitHub Issues Tracker</h1>
+      </div>
+      <div class="flex">
+        <div>
+          <label class="input">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 text-gray-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+              />
+            </svg>
+            <input type="text" placeholder="Search issues" required />
+          </label>
+        </div>
+        <button
+          class="py-2 px-4 text-[15px] font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer ml-6"
+        >
+          <i class="fa-solid fa-plus"></i>
+          New Issue
+        </button>
+      </div>
+    </header>
+    <main></main>
 
     <script src="./main.js"></script>
   </body>
