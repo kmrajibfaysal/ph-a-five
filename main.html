@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="max-w-[1200px] mx-auto my-6">
-    <header class="flex justify-between items-center">
+    <header class="flex justify-between items-center flex-col sm:flex-row">
       <div class="flex items-center gap-1.5">
         <img width="36px" src="./assets/github-logo.png" alt="" />
         <h1 class="text-2xl font-bold">GitHub Issues Tracker</h1>
@@ -57,7 +57,75 @@
         </button>
       </div>
     </header>
-    <main></main>
+    <main class="mt-24">
+      <!-- .. -->
+      <section id="tab" class="flex max-w-[400px] gap-x-1.5 mb-4">
+        <button
+          class="flex-1 py-2 px-4 text-[15px] font-medium rounded-md text-gray-400 border border-gray-200 hover:bg-blue-700 hover:text-white cursor-pointer mx-1 active"
+        >
+          All
+        </button>
+        <button
+          class="flex-1 py-2 px-4 text-[15px] font-medium rounded-md text-gray-400 border border-gray-200 hover:bg-blue-700 hover:text-white cursor-pointer mx-1"
+        >
+          Open
+        </button>
+        <button
+          class="flex-1 py-2 px-4 text-[15px] font-medium rounded-md text-gray-400 border border-gray-200 hover:bg-blue-700 hover:text-white cursor-pointer mx-1"
+        >
+          Closed
+        </button>
+      </section>
+      <!-- .. -->
+      <hr class="border-t border-gray-100" />
+      <!-- .. -->
+      <section class="my-4 flex justify-between">
+        <div class="flex items-center gap-2.5">
+          <div
+            class="rounded-full bg-gray-100 flex justify-center items-center w-[50px] h-[50px]"
+          >
+            <img
+              width="30px"
+              height="30px"
+              src="./assets/Aperture.png"
+              alt=""
+            />
+          </div>
+          <div>
+            <h2 class="font-bold text-lg">50 Issues</h2>
+            <p class="text-sm text-gray-500">
+              Track and manager your project issues
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-4 font-semibold">
+          <p class="flex items-center gap-1.5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 text-green-500"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            Open
+          </p>
+          <p class="flex items-center gap-1.5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 text-purple-500"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            Closed
+          </p>
+        </div>
+      </section>
+      <!-- .. -->
+      <hr class="border-t border-gray-100" />
+    </main>
 
     <script src="./main.js"></script>
   </body>
