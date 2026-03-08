@@ -28,7 +28,7 @@ async function fetchIssues() {
     const json = await res.json();
     issues = json.data; // array of issues
     renderIssues();
-  } catch {
+  } catch (err) {
     console.error('Error fetching issues:', err);
   }
 }
@@ -60,6 +60,7 @@ function renderIssues() {
 
   filtered.forEach((issue) => {
     const card = document.createElement('div');
+    card.addEventListener('click', () => handleModal(issue.id));
     card.className = 'card max-w-[24%]';
     if (issue.status === 'open') {
       card.classList.add('open-issue');
@@ -105,7 +106,7 @@ function renderIssues() {
             <p class="text-gray-500 text-[14px]">
               #1 by ${issue.author} <br />
 
-              ${issue.createdAt}
+              ${issue.createdAt.slice(0, 10)}
             </p>
           </div>
        
@@ -153,6 +154,79 @@ const manageSpinner = (status) => {
     document.getElementById('spinner').classList.add('hidden');
   }
 };
+
+async function handleModal(id) {
+  let issue = {};
+  try {
+    const res = await fetch(
+      `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
+    );
+    const json = await res.json();
+    issue = json.data;
+    console.log(issue.title);
+  } catch (err) {
+    console.error('Error fetching issues:', err);
+  }
+
+  const div = document.getElementById('issue-details');
+
+  div.innerHTML = `
+            <div class="modal-box p-8">
+      <h2 class="text-xl font-bold my-2">${issue.title}</h2>
+      <p class="text-gray-500 text-[14px]">
+        <span
+            class="rounded-3xl mr-2 ${issue.status === 'open' ? 'bg-[#00a96e]' : 'bg-[#a855f7]'} text-white px-4 py-1 text-[12px]"
+          >
+            ${issue.status === 'open' ? 'OPENED' : 'CLOSED'}
+          </span>Opened by ${issue.author} . ${issue.createdAt.slice(0, 10)}
+      </p>
+      <div class="flex flex-wrap gap-1.5 my-3 justify-start items-center">
+        <span
+          class="${!issue.labels.includes('bug') ? 'hidden' : ''} rounded-3xl bg-[#feecec] text-red-500 px-4 py-1 text-[12px] border border-[#fecaca]"
+        >
+          <i class="fa-solid fa-bug"></i>
+          BUG</span
+        >
+        <span
+          class="${!issue.labels.includes('help wanted') ? 'hidden' : ''} rounded-3xl bg-[#fff8db] text-[#d97706] px-4 py-1 text-[12px] border border-[#fde68a]"
+          ><i class="fa-solid fa-life-ring"></i> HELP WANTED</span
+        >
+        <span
+          class="${!issue.labels.includes('enhancement') ? 'hidden' : ''} rounded-3xl bg-[#defce8] text-[#00a96e] px-4 py-1 text-[12px] border border-[#bbf7d0]"
+          ><i class="fa-regular fa-star"></i> ENHANCEMENT</span
+        >
+        <span
+          class="${!issue.labels.includes('documentation') ? 'hidden' : ''} rounded-3xl text-gray-400 px-4 py-1 text-[12px] border border-gray-600"
+          ><i class="fa-solid fa-file"></i> DOCUMENTATION</span
+        >
+      </div>
+
+      <p class="text-gray-500 my-3">${issue.description}</p>
+
+      <div class="flex justify-between items-center mb-5">
+        <p class="text-gray-500">
+          Assignee:<br/>
+          <span class="font-bold text-black">${issue.assignee}</span>
+        </p>
+
+        <p class="text-gray-500">
+          Priority:<br />
+          <span
+            class="rounded-3xl bg-[#feecec] text-red-500 px-4 py-1 text-[12px]"
+          >
+            ${issue.priority.toUpperCase()}
+          </span>
+        </p>
+      </div>
+      <form method="dialog" class="flex justify-end">
+        <button class="btn active">Close</button>
+      </form>
+    </div>
+       
+        `;
+
+  document.getElementById('issue-details').showModal();
+}
 
 // Initial render fetch
 fetchIssues();
