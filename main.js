@@ -112,5 +112,30 @@ function renderIssues() {
     container.appendChild(card);
   });
 }
+// Tab buttons
 
+document.getElementById('allBtn').addEventListener('click', () => {
+  currentFilter = 'all';
+  setActive('allBtn');
+  renderIssues();
+});
+document.getElementById('openBtn').addEventListener('click', () => {
+  currentFilter = 'open';
+  setActive('openBtn');
+  renderIssues();
+});
+document.getElementById('closedBtn').addEventListener('click', () => {
+  currentFilter = 'closed';
+  setActive('closedBtn');
+  renderIssues();
+});
+
+function setActive(activeId) {
+  document
+    .querySelectorAll('.buttons button')
+    .forEach((btn) => btn.classList.remove('active'));
+  document.getElementById(activeId).classList.add('active');
+}
+
+// Initial render fetch
 fetchIssues();
