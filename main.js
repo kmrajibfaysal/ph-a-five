@@ -70,9 +70,9 @@ function renderIssues() {
             <div class="flex justify-between mb-2">
               ${issue.status === 'open' ? `<img src="./assets/Open-Status.png" alt="" />` : `<img src="./assets/Closed- Status .png" alt="" />`}
               <span
-                class="rounded-3xl bg-[#feecec] text-red-500 px-4 py-1 text-[12px]"
-                >HIGH</span
-              >
+                class="rounded-3xl bg-[#feecec] text-red-500 px-4 py-1 text-[12px]">
+                ${issue.priority.toUpperCase()}
+                </span>
             </div>
             <h3 class="font-semibold text-[16px]">
               ${issue.title}
