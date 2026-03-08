@@ -6,7 +6,20 @@
   font-family: 'Geist', sans-serif;
 }
 
-.active{
-    color: white;
-    background-color: #1447e6;
+.active {
+  color: white;
+  background-color: #1447e6;
+}
+
+.card {
+  /* max-width: 24%; */
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.open-issue {
+  border-top: 5px solid green;
+}
+
+.closed-issue {
+  border-top: 5px solid #a855f7;
 }
