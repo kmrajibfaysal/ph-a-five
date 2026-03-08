@@ -61,7 +61,7 @@ function renderIssues() {
   filtered.forEach((issue) => {
     const card = document.createElement('div');
     card.addEventListener('click', () => handleModal(issue.id));
-    card.className = 'card max-w-[24%]';
+    card.className = 'card max-w-full sm:max-w-[24%] mx-2 sm:mx-0';
     if (issue.status === 'open') {
       card.classList.add('open-issue');
     } else {
@@ -163,7 +163,6 @@ async function handleModal(id) {
     );
     const json = await res.json();
     issue = json.data;
-    console.log(issue.title);
   } catch (err) {
     console.error('Error fetching issues:', err);
   }
