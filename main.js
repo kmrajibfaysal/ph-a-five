@@ -23,6 +23,7 @@ let searchQuery = '';
 // fetch issues from api
 async function fetchIssues() {
   try {
+    manageSpinner(true);
     const res = await fetch(API_URL);
     const json = await res.json();
     issues = json.data; // array of issues
@@ -110,6 +111,7 @@ function renderIssues() {
        
         `;
     container.appendChild(card);
+    manageSpinner(false);
   });
 }
 // Tab buttons
@@ -136,6 +138,21 @@ function setActive(activeId) {
     .forEach((btn) => btn.classList.remove('active'));
   document.getElementById(activeId).classList.add('active');
 }
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchQuery = e.target.value;
+  renderIssues();
+});
+
+const manageSpinner = (status) => {
+  if (status == true) {
+    document.getElementById('spinner').classList.remove('hidden');
+    document.getElementById('issues-container').classList.add('hidden');
+  } else {
+    document.getElementById('issues-container').classList.remove('hidden');
+    document.getElementById('spinner').classList.add('hidden');
+  }
+};
 
 // Initial render fetch
 fetchIssues();
